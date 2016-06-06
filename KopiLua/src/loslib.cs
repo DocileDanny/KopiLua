@@ -429,11 +429,11 @@ namespace KopiLua
 							continue;
 
 						case 'Z': // Timezone name or abbreviation (locale dependent) or nothing if unavailable (e.g. CDT)
-							pt = StrFTimeAdd(TimeZoneInfo.Local.StandardName, pt, ptlim);
+                            pt = StrFTimeAdd(System.TimeZone.CurrentTimeZone.StandardName, pt, ptlim);
 							continue;
 
 						case 'z': // ISO 8601 offset from UTC in timezone (+/-hhmm), or nothing if unavailable
-							TimeSpan ts = TimeZoneInfo.Local.GetUtcOffset(t);
+							TimeSpan ts = System.TimeZone.CurrentTimeZone.GetUtcOffset(t);
 							string offset = (ts.Ticks < 0 ? "-" : "+") + ts.TotalHours.ToString("#00") + ts.Minutes.ToString("00");
 							pt = StrFTimeAdd(offset, pt, ptlim);
 							continue;
